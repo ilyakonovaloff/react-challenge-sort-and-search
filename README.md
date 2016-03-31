@@ -1,21 +1,21 @@
-# Пилотный выпуск React Challenge: сортировка и поиск данных
+# Pilot episode React Challenge: Search and sorting data
 
-[Статья на сайте](http://jsraccoon.ru/react-challenge-sort-and-search)
+[Article on site](http://jsraccoon.ru/react-challenge-sort-and-search)
 
-[Демо приложения](http://rtivital.github.io/react-challenge-sort-and-search-solution/)
+[My app](http://ilyakonovaloff.github.io/react-challenge-sort-and-search/)
 
-Что делать:
+What to do:
 
-* Форкнуть этот репозиторий
-* Склонировать свой форк `git clone https://github.com/<ваш_аккаунт_на_гитхабе>/react-challenge-sort-and-search`
-* Открыть папку `cd react-challenge-sort-and-search`
-* Установить все зависимости `npm install`
-* Запустить галп `gulp`
-* Вы восхитительны и готовы к челенджу!
+* Fork this repo
+* Clone your fork `git clone https://github.com/<your_github_account>/react-challenge-sort-and-search`
+* Open folder `cd react-challenge-sort-and-search`
+* Run `npm install`
+* Run `gulp`
+* You are amazing and ready for the Challenge! Let's Rock!
 
-## Таски для галпа
+## Gulp's tasks
 
-* Дефолтный (просто `gulp`): запускает browsersync и решрешит при изменении js, css и html. Браузер должен открыть самостоятельно.
-* Деплой (`gulp deploy`): пушит всё, что находится в папке `public` в ветку `gh-pages`. В результате сайт можно показать другу
+* Default (`gulp`): run browsersync and refresh when it changes js, css and html.
+* Deploy (`gulp deploy`): push all content from `public` to `gh-pages`. Show site your friends.
 
-## Удачи!
+## Good luck!

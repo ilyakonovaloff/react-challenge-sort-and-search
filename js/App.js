@@ -1,5 +1,11 @@
 import React from 'react';
 
+import ActiveUser from './components/ActiveUser';
+import SearchBar from './components/SearchBar';
+import ToolBar from './components/ToolBar';
+import UsersList from './components/UsersList';
+
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -7,18 +13,16 @@ export default class App extends React.Component {
     this.state = {
       users: []
     };
-
-    this.loadUsersFromServer = this.loadUsersFromServer.bind(this);
   }
 
   loadUsersFromServer() {
     httpGet(this.props.source)
-        .then(
-            response => {
-              this.setState({users: JSON.parse(response)});
-            },
-            error => alert(`Rejected: ${error}`)
-        );
+      .then(
+        response => {
+          this.setState({users: JSON.parse(response)});
+        },
+        error => alert(`Rejected: ${error}`)
+      );
   }
 
   componentDidMount() {
@@ -26,14 +30,26 @@ export default class App extends React.Component {
   }
 
   render() {
-    var rowsUsers = [];
-    this.state.users.forEach(function(user) {
-      rowsUsers.push(<div key={user.name}>{user.name}</div>);
-    });
-
     return (
-      <div className="container app">
-        {rowsUsers}
+      <div className="app container-fluid">
+        <div className="row">
+          <div className="col-sm-12">
+            <SearchBar/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-12">
+            <ToolBar/>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-sm-4 col-md-3 col-lg-2">
+            <ActiveUser/>
+          </div>
+          <div className="col-sm-8 col-md-9 col-lg-10">
+            <UsersList users={this.state.users}/>
+          </div>
+        </div>
       </div>
     );
   }
