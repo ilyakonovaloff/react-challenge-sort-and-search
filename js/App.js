@@ -11,7 +11,8 @@ export default class App extends React.Component {
     super(props);
 
     this.state = {
-      users: []
+      users: [],
+      activeUser: {}
     };
   }
 
@@ -19,7 +20,11 @@ export default class App extends React.Component {
     httpGet(this.props.source)
       .then(
         response => {
-          this.setState({users: JSON.parse(response)});
+          let users = JSON.parse(response);
+          this.setState({
+            users: users,
+            activeUser: users[0]
+          });
         },
         error => alert(`Rejected: ${error}`)
       );
@@ -44,7 +49,7 @@ export default class App extends React.Component {
         </div>
         <div className="row">
           <div className="col-sm-4 col-md-3 col-lg-2">
-            <ActiveUser/>
+            <ActiveUser user={this.state.activeUser}/>
           </div>
           <div className="col-sm-8 col-md-9 col-lg-10">
             <UsersList users={this.state.users}/>

@@ -5,12 +5,26 @@ import UserData from './UserData';
 export default class UsersList extends React.Component {
 
   render() {
-    var rowsUsers = [];
+    let rowsUsers = [];
     this.props.users.forEach(function(user) {
       rowsUsers.push(<UserData user={user} key={user.name}/>);
     });
     return(
-      <div>{rowsUsers}</div>
+      <div>
+        <table className="table table-striped">
+          <thead>
+          <tr>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Phone</th>
+          </tr>
+          </thead>
+          <tbody>
+            {rowsUsers}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

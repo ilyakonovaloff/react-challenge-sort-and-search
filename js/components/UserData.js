@@ -5,10 +5,12 @@ export default class UserData extends React.Component {
   render() {
 
     return(
-      <div>
-        <div>{this.props.user.name}</div>
-        <div>{this.props.user.phrase}</div>
-      </div>
+        <tr>
+            <td><img className="avatar" src={'images/' + this.props.user.image + '.svg'} /></td>
+            <td>{this.props.user.name}</td>
+            <td>{this.props.user.age}</td>
+            <td>{this.props.user.phone}</td>
+        </tr>
     );
   }
 }
