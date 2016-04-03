@@ -12,19 +12,27 @@ export default class App extends React.Component {
 
     this.state = {
       users: [],
-      activeUser: {}
+      activeUser: {},
+      searchText: '',
+      loaded: false
     };
+
+    this.initUsers = [];
+    this.updateState = this.updateState.bind(this);
   }
 
   loadUsersFromServer() {
     httpGet(this.props.source)
       .then(
         response => {
-          let users = JSON.parse(response);
+          this.initUsers = JSON.parse(response);
+
           this.setState({
-            users: users,
-            activeUser: users[0]
+            users: JSON.parse(response),
+            activeUser: this.initUsers[0]
           });
+
+          this.updateState({loaded: true});
         },
         error => alert(`Rejected: ${error}`)
       );
@@ -34,29 +42,57 @@ export default class App extends React.Component {
     this.loadUsersFromServer();
   }
 
+  updateState(state) {
+      this.setState(state);
+  }
+
   render() {
-    return (
-      <div className="app container-fluid">
-        <div className="row">
-          <div className="col-sm-12">
-            <SearchBar/>
+
+    if (this.state.loaded) {
+      return (
+        <div className="app container-fluid">
+          <div className="row">
+            <div className="col-sm-12">
+              <SearchBar
+                  initUsers={this.initUsers}
+                  searchText={this.state.searchText}
+                  updateState={this.updateState}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-12">
+              <ToolBar
+                  users={this.state.users}
+                  updateState={this.updateState}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-4 col-md-3 col-lg-2">
+              <ActiveUser
+                  user={this.state.activeUser}
+              />
+            </div>
+            <div className="col-sm-8 col-md-9 col-lg-10">
+              <UsersList
+                  users={this.state.users}
+                  searchText={this.state.searchText}
+                  updateState={this.updateState}
+              />
+            </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-sm-12">
-            <ToolBar/>
+      );
+    } else {
+      return (
+          <div className="app container-fluid">
+            <div className="preloader">
+              <img src="images/ring.svg" />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-4 col-md-3 col-lg-2">
-            <ActiveUser user={this.state.activeUser}/>
-          </div>
-          <div className="col-sm-8 col-md-9 col-lg-10">
-            <UsersList users={this.state.users}/>
-          </div>
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 

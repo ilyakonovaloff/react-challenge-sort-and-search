@@ -5,10 +5,16 @@ import UserData from './UserData';
 export default class UsersList extends React.Component {
 
   render() {
+
     let rowsUsers = [];
     this.props.users.forEach(function(user) {
-      rowsUsers.push(<UserData user={user} key={user.name}/>);
-    });
+      rowsUsers.push(<UserData
+          user={user}
+          key={user.id}
+          updateState={this.props.updateState}
+      />);
+    }.bind(this));
+
     return(
       <div>
         <table className="table table-striped">
